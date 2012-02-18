@@ -88,7 +88,7 @@ var WebStorage = function(storage, options) {
     
     data = JSON.parse(data);
     
-      if (data.expire > 0 && _getTimestamp() > data.timestamp + data.expire) {
+    if (data.expire > 0 && _getTimestamp() > data.timestamp + data.expire) {
       this.remove(nskey);
       
       return null;        
@@ -123,8 +123,17 @@ var WebStorage = function(storage, options) {
   };
 
 
-   this.clear = function() {
-    _storage.clear();
+  this.clear = function() {
+    var re =  new RegExp("^" + _options.namespace + "\\\\");
+  
+    for (var i=0; i < _storage.length; i++) {
+      var nskey =  _storage.key(i);
+      
+      if (nskey.match(re)) {
+        _storage.removeItem(nskey);
+      }
+    }
+
     return this;
   };
   
