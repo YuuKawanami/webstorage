@@ -1,4 +1,4 @@
-HTML5 Web Storage API wapper library
+HTML5 Web Storage API wrapper library
 ==================================================
 
 Example
