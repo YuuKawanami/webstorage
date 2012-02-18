@@ -79,8 +79,7 @@ var WebStorage = function(storage, options) {
 
   this.get = function(key) {
     var nskey = _prependNamespace(key);
-    
-    var data = _storage.getItem(nskey);
+    var data  = _storage.getItem(nskey);
 
     if (data === null) {
       return null;
@@ -89,7 +88,7 @@ var WebStorage = function(storage, options) {
     data = JSON.parse(data);
     
     if (data.expire > 0 && _getTimestamp() > data.timestamp + data.expire) {
-      this.remove(nskey);
+      _storage.removeItem(nskey);
       
       return null;        
     }
