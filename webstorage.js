@@ -88,7 +88,7 @@ var WebStorage = function(storage, options) {
     
     data = JSON.parse(data);
     
-      if (data.expire > 0 && _getTimestamp() > data.timestamp + data.expire) {
+    if (data.expire > 0 && _getTimestamp() > data.timestamp + data.expire) {
       this.remove(nskey);
       
       return null;        
