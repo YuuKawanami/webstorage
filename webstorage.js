@@ -23,20 +23,27 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+/**
+ * Web Storage (localStorage/sessionStorage) ラッパーライブラリ
+ *
+ * @param {Object} storage localStorage または sessionStorage オブジェクト
+ * @param {Object} options オプション
+ *                  - {String} namespace 名前空間             (デフォルト: "")
+ *                  - {Number} expire    有効期限(秒)の初期値 (デフォルト: 0 (期限なし))
+ */
 var WebStorage = function(storage, options) {
-
-  //** init **//
 
   // localStorage or sessionStorage Object
   var _storage = storage;
-
   
-  // default configuration
+  // default configuration options
   var _options = {
     namespace: "",
     expire   : 0,
   };
   
+
+  //** initialization **//
 
   if (typeof options == "object") {
     // namespace
@@ -57,19 +64,16 @@ var WebStorage = function(storage, options) {
     return typeof namespace == "string"
   }
 
-  
   function _isValidExpire(expire) {
     return typeof expire == "number" && expire >= 0;
   }
 
-  
   function _getTimestamp() {
     var date = new Date();
     var now  =  date.getTime() / 1000;
     return Math.round(now);
   }
 
-  
   function _prependNamespace(key) {
       return _options.namespace + "\\" + key;
   };
@@ -77,6 +81,12 @@ var WebStorage = function(storage, options) {
   
   //**  public methods **//
 
+  /**
+   * 名前空間ストレージから、キーを指定して値を取得する 
+   *
+   * @param {String} key ストレージのキー
+   * @return {String} or {Number} or {Object} ストレージの値 (有効期限切れの場合、NULL)
+   */
   this.get = function(key) {
     var nskey = _prependNamespace(key);
     var data  = _storage.getItem(nskey);
@@ -97,6 +107,14 @@ var WebStorage = function(storage, options) {
   };
 
 
+  /**
+   * 名前空間ストレージに、キーを指定して値を保存する
+   *
+   * @param {String}                         key    ストレージのキー
+   * @param {String} or {Number} or {Object} value  ストレージの値
+   * @param {Number}                         expire 有効期限(秒) (未指定の場合、コンストラクタで指定した有効期限)
+   * @return {Object} WebStorage
+   */
   this.set = function(key, value, expire) {
     var nskey = _prependNamespace(key);
 
@@ -114,7 +132,13 @@ var WebStorage = function(storage, options) {
     return this;
   };
 
-  
+
+  /**
+   * 名前空間ストレージから、キーを指定して値を削除する
+   *
+   * @param {String} ストレージのキー
+   * @return {Object} WebStorage
+   */
   this.remove = function(key) {
     var nskey = _prependNamespace(key);
     _storage.removeItem(nskey);
@@ -122,6 +146,11 @@ var WebStorage = function(storage, options) {
   };
 
 
+  /**
+   * 名前空間ストレージから、値をすべて削除する
+   *
+   * @return {Object} WebStorage
+   */
   this.clear = function() {
     var re =  new RegExp("^" + _options.namespace + "\\\\");
   
