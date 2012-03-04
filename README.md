@@ -19,7 +19,7 @@ Example
 
 API
 --------------------------------------
-* WebStorage(storage, options)
+####WebStorage(storage, options)
 
     /**
      * Web Storage (localStorage/sessionStorage) ラッパーライブラリ
@@ -30,7 +30,7 @@ API
      *                  - {Number} expire    有効期限(秒)の初期値 (デフォルト: 0 (期限なし))
      */
 
-* get(key)
+####get(key)
 
     /**
      * 名前空間ストレージから、キーを指定して値を取得する 
@@ -39,7 +39,7 @@ API
      * @return {String} or {Number} or {Object} ストレージの値 (有効期限切れの場合、NULL)
      */
 
-* set(key, valuee, expire)
+####set(key, valuee, expire)
 
     /**
      * 名前空間ストレージに、キーを指定して値を保存する
@@ -50,7 +50,7 @@ API
      * @return {Object} WebStorage
      */
 
-* remove(key)
+####remove(key)
 
     /**
      * 名前空間ストレージから、キーを指定して値を削除する
@@ -59,7 +59,7 @@ API
      * @return {Object} WebStorage
      */
 
-* clear()
+####clear()
 
     /**
      * 名前空間ストレージから、値をすべて削除する
