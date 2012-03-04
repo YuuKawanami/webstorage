@@ -9,7 +9,7 @@ Example
       expire   : 24*60*60, // 名前空間"hoge"でのデフォルトの有効期限：１日
     };
     
-    ls = new WebStorage(localStorage, options);
+    var ls = new WebStorage(localStorage, options);
     
     ls.set("foo", "FOO");             // 有効期限：１日
     ls.set("bar", {one:1, two:2}, 0); // 有効期限なし
@@ -22,7 +22,7 @@ API
 ####WebStorage(storage, options)
 
     /**
-     * Web Storage (localStorage/sessionStorage) ラッパーライブラリ
+     * コンストラクタ
      *
      * @param {Object} storage localStorage または sessionStorage オブジェクト
      * @param {Object} options オプション
@@ -39,7 +39,7 @@ API
      * @return {String} or {Number} or {Object} ストレージの値 (有効期限切れの場合、NULL)
      */
 
-####set(key, valuee, expire)
+####set(key, value, expire)
 
     /**
      * 名前空間ストレージに、キーを指定して値を保存する
