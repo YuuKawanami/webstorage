@@ -24,7 +24,7 @@
  */
 
 /**
- * Web Storage (localStorage/sessionStorage) ラッパーライブラリ
+ * コンストラクタ
  *
  * @param {Object} storage localStorage または sessionStorage オブジェクト
  * @param {Object} options オプション
